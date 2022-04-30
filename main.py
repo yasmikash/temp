@@ -17,9 +17,10 @@ from flask import Flask, request, jsonify
 # define a flask app
 app = Flask(__name__)
 
+model = pickle.load(open('models/final_temperature_detection_model.pkl', 'rb'))
+
 @app.route('/temperature',methods=['POST'])
 def temperature():
-    model = pickle.load(open('models/final_temperature_detection_model.pkl', 'rb'))
     # get the data from the POST request.
     data = request.get_json(force=True)
     # make prediction using model loaded from disk as per the data.
